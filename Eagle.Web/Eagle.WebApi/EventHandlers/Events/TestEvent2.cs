@@ -6,7 +6,7 @@ using Util.Events;
 
 namespace Eagle.WebApi.EventHandlers.Events
 {
-    public class TestEvent : Event, IEvent
+    public class TestEvent2 : Event, IEvent
     {
         public int Number { get; set; }
 

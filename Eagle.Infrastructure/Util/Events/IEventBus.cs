@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Util.Events.Handlers;
 
 namespace Util.Events {
     /// <summary>
@@ -13,17 +15,14 @@ namespace Util.Events {
         Task PublishAsync<TEvent>( TEvent @event ) where TEvent : Event;
 
         /// <summary>
-        /// 添加事件订阅
+        /// 事件订阅，添加事件处理器
         /// </summary>
-        /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="host"></param>
-        /// <param name="queue"></param>
-        /// <param name="concurrentConsumers"></param>
         /// <param name="userName"></param>
         /// <param name="password"></param>
+        /// <param name="handlerConfigurator"></param>
         /// <returns></returns>
-        Task SubscribeAt<TEvent>(string host, string queue, int concurrentConsumers = 5,
-            string userName = "guest",
-            string password = "guest") where TEvent : Event;
+        Task SubscribeAsync(string host, string userName = "guest", string password = "guest",
+            Action<IEventHandlerConfiguration> handlerConfigurator = null);
     }
 }

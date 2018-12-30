@@ -26,16 +26,16 @@ namespace Util.EventBus.RabbitMQ
         /// <param name="password"></param>
         public EventPublisher(string host, string userName ="guest", string password = "guest")
         {
-            var bus = Bus.Factory.CreateUsingRabbitMq(config =>
-            {
-                var mqHost = config.Host(new Uri($"rabbitmq://{host}:/"), h =>
-                {
-                    h.Username(userName);
-                    h.Password(password);
-                });                
-            });
-            _busControl = bus;
-            bus.Start();
+            //var bus = Bus.Factory.CreateUsingRabbitMq(config =>
+            //{
+            //    var mqHost = config.Host(new Uri($"rabbitmq://{host}:/"), h =>
+            //    {
+            //        h.Username(userName);
+            //        h.Password(password);
+            //    });                
+            //});
+            //_busControl = bus;
+            //bus.Start();
         }
 
         /// <summary>

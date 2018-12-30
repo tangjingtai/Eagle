@@ -73,7 +73,7 @@ namespace Util.Dependency {
         private object GetService( Type type, string name ) {
             if( name == null )
                 return _container.Resolve( type );
-            return _container.ResolveNamed( name, type );
+            return _container.ResolveNamed( name, type ); 
         }
 
         /// <summary>
