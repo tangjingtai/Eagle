@@ -74,12 +74,9 @@ namespace Eagle.WebApi
                     {
                         o.TokenValidationParameters = new TokenValidationParameters
                         {
-                            NameClaimType = JwtClaimTypes.Name,
-                            RoleClaimType = JwtClaimTypes.Role,
-
-                            ValidIssuer = ConstantFactory.ValidIssuer,
-                            ValidAudience = ConstantFactory.ValidAudience,
-                            IssuerSigningKey = ConstantFactory.SymmetricKey
+                            ValidIssuer = JWTHelper.ISSUER,
+                            ValidAudience = JWTHelper.AUDIENCE,
+                            IssuerSigningKey = JWTHelper.SYMMTRIC_KEY
                             /***********************************TokenValidationParameters的参数默认值***********************************/
                             // RequireSignedTokens = true,
                             // SaveSigninToken = false,

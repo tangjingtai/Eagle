@@ -26,32 +26,17 @@ namespace Eagle.WebApi.Controllers
         [HttpPost]
         public IActionResult Authenticate([FromBody]AuthenticateRequest request)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
             var authTime = DateTime.UtcNow;
             var expiresAt = authTime.AddDays(1);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(JwtClaimTypes.Audience, ConstantFactory.ValidAudience),
-                    new Claim(JwtClaimTypes.Issuer,ConstantFactory.ValidIssuer),
-                    new Claim(JwtClaimTypes.Id, "1"),
-                    new Claim(JwtClaimTypes.Name, "xxx"),
-                    new Claim(JwtClaimTypes.Email, "xxx@qq.com")
-                }),
-                Expires = expiresAt,
-                SigningCredentials = new SigningCredentials(ConstantFactory.SymmetricKey, SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            var token = JWTHelper.CreateToken(new JWTPayloadInfo { Subject = "用户Id加密", Name = "用户真实姓名", Role = "用户角色" }, expiresAt);
             return Ok(new
             {
-                access_token = tokenString,
+                access_token = token,
                 token_type = "Bearer",
                 profile = new
                 {
                     sid = "1",
-                    name = "xxxx",
+                    name = "用户真实姓名",
                     auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
                     expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
                 }

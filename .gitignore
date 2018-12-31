@@ -3,3 +3,10 @@
 ################################################################################
 
 /.vs/Eagle
+/output/release/netstandard2.0
+/Eagle.Infrastructure/Util.Security/obj
+/Eagle.Infrastructure/Util.Logs/obj
+/Eagle.Infrastructure/Util.Datas/obj
+/Eagle.Infrastructure/Util/obj
+/Eagle.Infrastructure/Util.Caches/bin/Debug/netstandard2.0
+/Eagle.Infrastructure/Util.Caches/obj/Debug/netstandard2.0
