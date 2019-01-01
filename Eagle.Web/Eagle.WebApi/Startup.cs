@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using IdentityModel;
 using Eagle.WebApi.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Eagle.WebApi
 {
@@ -68,31 +69,28 @@ namespace Eagle.WebApi
                 config.UserName = "guest";
                 config.Password = "guest";
             });
+            // 注册不同的鉴权策略，适用不同的业务场景
+            var permissionRequirement = new PermissionRequirement();
+            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(o =>
-                    {
-                        o.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidIssuer = JWTHelper.ISSUER,
-                            ValidAudience = JWTHelper.AUDIENCE,
-                            IssuerSigningKey = JWTHelper.SYMMTRIC_KEY
-                            /***********************************TokenValidationParameters的参数默认值***********************************/
-                            // RequireSignedTokens = true,
-                            // SaveSigninToken = false,
-                            // ValidateActor = false,
-                            // 将下面两个参数设置为false，可以不验证Issuer和Audience，但是不建议这样做。
-                            // ValidateAudience = true,
-                            // ValidateIssuer = true, 
-                            // ValidateIssuerSigningKey = false,
-                            // 是否要求Token的Claims中必须包含Expires
-                            // RequireExpirationTime = true,
-                            // 允许的服务器时间偏移量
-                            // ClockSkew = TimeSpan.FromSeconds(300),
-                            // 是否验证Token有效期，使用当前时间与Token的Claims中的NotBefore和Expires对比
-                            // ValidateLifetime = true
-                        };
-                    });
+            services.AddAuthentication(authenOptions =>
+            {
+                authenOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authenOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(o =>
+             {
+                 // 添加使用JWT作为身份验证，验证未通过返回401
+                 o.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidIssuer = JWTHelper.ISSUER,
+                     ValidAudience = JWTHelper.AUDIENCE,
+                     IssuerSigningKey = JWTHelper.SYMMTRIC_KEY
+                 };
+             });
+            services.AddAuthorization(authorOptions => {
+                authorOptions.AddPolicy("Permission", policy => policy.Requirements.Add(permissionRequirement));
+            });
 
             //添加Swagger
             services.AddSwaggerGen(options => {
@@ -104,10 +102,13 @@ namespace Eagle.WebApi
                     In = "header",
                     Type = "apiKey"
                 });
+                options.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", Enumerable.Empty<string>() }
+                });
 
-                options.SwaggerDoc("v1", new Info { Title = "Eagle Web Api Demo", Version = "v1" });
+                options.SwaggerDoc("v1", new Info { Title = "Eagle Web Api", Version = "v1" });
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Util.xml"));
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Util.Webs.xml"));
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Eagle.WebApi.xml"));
             });
 
@@ -168,7 +169,18 @@ namespace Eagle.WebApi
             });
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                   name: "Default",
+                   template: "api/{controller}/{action}/{id?}",
+                   defaults: new { controller = "Home", action = "Index" }
+               );
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Eagle Web Api V1");
+            });
         }
     }
 }

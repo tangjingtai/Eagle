@@ -10,3 +10,10 @@
 /Eagle.Infrastructure/Util/obj
 /Eagle.Infrastructure/Util.Caches/bin/Debug/netstandard2.0
 /Eagle.Infrastructure/Util.Caches/obj/Debug/netstandard2.0
+/Eagle.Infrastructure/Util.Caches/obj
+/Eagle.Web/Eagle.WebApi/obj
+/Eagle.Infrastructure/Util.EventBus/obj/Debug/netstandard2.0
+/Eagle.Infrastructure/Util.EventBus/obj
+/Eagle.Infrastructure/Util/bin/Debug
+/Eagle.Infrastructure/Util.EventBus/bin/Debug/netstandard2.0
+/Eagle.Web/Eagle.WebApi/bin/Debug/netcoreapp2.2

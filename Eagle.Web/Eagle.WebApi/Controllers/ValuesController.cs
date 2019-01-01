@@ -6,6 +6,7 @@ using AI.Model.Recommend;
 using Eagle.WebApi.Common;
 using Eagle.WebApi.EventHandlers.Events;
 using Eagle.WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Util.Caches;
@@ -31,6 +32,7 @@ namespace Eagle.WebApi.Controllers
 
         // GET api/values
         [HttpGet]
+        [Authorize(Roles = "guest,admin", Policy = "Permission")]
         public ActionResult<IEnumerable<string>> Get()
         {
             _logger.LogInformation("values get");
@@ -39,6 +41,7 @@ namespace Eagle.WebApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin", Policy = "Permission")]
         public async Task<ActionResult<string>> Get(int id)
         {
             if (id == 1)

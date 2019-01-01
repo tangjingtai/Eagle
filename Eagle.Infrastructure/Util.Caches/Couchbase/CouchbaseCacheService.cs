@@ -6,6 +6,7 @@ using ProtoBuf;
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Collections.Generic;
 
 namespace Util.Caches.Couchbase
 {
@@ -18,27 +19,52 @@ namespace Util.Caches.Couchbase
 
         private string _defaultBucketName;
 
+        /// <summary>
+        /// 构造函数，不会对couchbase客户端进行初始化
+        /// </summary>
+        /// <param name="defaultBucketName"></param>
+        public CouchbaseCacheService(string defaultBucketName = null)
+        {
+            _defaultBucketName = defaultBucketName;
+        }
+        /// <summary>
+        /// 构造函数，对couchbase客户端进行初始化
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="defaultBucketName"></param>
         public CouchbaseCacheService(CouchbaseConfig config, string defaultBucketName = null)
         {
+            _defaultBucketName = defaultBucketName;
+            InitClusterClient(config);
+        }
+
+        /// <summary>
+        /// 初始化couchbase客户端
+        /// </summary>
+        /// <param name="config"></param>
+        public void InitClusterClient(CouchbaseConfig config)
+        {
+            config.CheckNull(nameof(config));
             if (config.Urls == null || config.Urls.Count == 0)
                 throw new ArgumentNullException(nameof(config), "couchbase 配置错误，必须提供url");
             if (config.BucketAndPassword == null || config.BucketAndPassword.Count == 0)
                 throw new ArgumentNullException(nameof(config), "couchbase 配置错误，必须提供bucket");
-
-            _defaultBucketName = defaultBucketName;
-
-            var clientConfiguration = new ClientConfiguration
+            if(_cluster != null)
+                _cluster.Dispose();
+            if (config != null && config.Urls != null && config.Urls.Count > 0)
             {
-                Servers = config.Urls.Select(x => new Uri(x)).ToList()
-            };
-            _cluster = new Cluster(clientConfiguration);
-            foreach(var kv in config.BucketAndPassword)
-            {
-                var authenticator = new PasswordAuthenticator(kv.Key, kv.Value);
-                _cluster.Authenticate(authenticator);
+                var clientConfiguration = new ClientConfiguration
+                {
+                    Servers = config.Urls.Select(x => new Uri(x)).ToList()
+                };
+                _cluster = new Cluster(clientConfiguration);
+                foreach (var kv in config.BucketAndPassword ?? new Dictionary<string, string>())
+                {
+                    var authenticator = new PasswordAuthenticator(kv.Key, kv.Value);
+                    _cluster.Authenticate(authenticator);
+                }
             }
         }
-
 
         public TValue Get<TValue>(string sectionName, string key) where TValue : class
         {

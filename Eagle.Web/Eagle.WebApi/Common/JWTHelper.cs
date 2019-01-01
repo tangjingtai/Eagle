@@ -1,4 +1,5 @@
 ﻿using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -148,6 +149,7 @@ namespace Eagle.WebApi.Common
         {
             if (string.IsNullOrEmpty(Subject))
                 return new ValidationResultCollection("Subject can not be null or empty.");
+
             return new ValidationResultCollection();            
         }
     }
