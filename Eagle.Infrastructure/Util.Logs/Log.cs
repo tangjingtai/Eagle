@@ -103,7 +103,7 @@ namespace Util.Logs {
                 return Ioc.Create<ILogProviderFactory>();
             }
             catch {
-                return new Util.Logs.NLog.LogProviderFactory();
+                return new Util.Logs.NLog.NLogProviderFactory();
             }
         }
 

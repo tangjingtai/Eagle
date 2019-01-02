@@ -5,26 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Util;
 using Util.Datas.Dapper;
-using Util.Caches;
 using Eagle.WebApi.EventHandlers.Events;
-using Util.Helpers;
 using AspectCore.Configuration;
 using Eagle.WebApi.EventHandlers;
 using Util.EventBus.RabbitMQ;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using IdentityModel;
 using Eagle.WebApi.Common;
 using Microsoft.AspNetCore.Authorization;
+using Util.Logs.Extensions;
 
 namespace Eagle.WebApi
 {
@@ -50,9 +46,10 @@ namespace Eagle.WebApi
                 logginBuilder.ClearProviders();
                 logginBuilder.AddFilter("System", LogLevel.Warning);
                 logginBuilder.AddFilter("Microsoft", LogLevel.Warning);
-                logginBuilder.SetMinimumLevel(LogLevel.Trace);
-                logginBuilder.AddLog4Net("log4net.config");
+                logginBuilder.SetMinimumLevel(LogLevel.Trace); 
             });
+            services.AddLog4net();
+            //services.AddNLog();
 
             // 添加mysql数据库作为数据存储介质
             services.AddMySqlDatabase();
@@ -155,7 +152,7 @@ namespace Eagle.WebApi
                 {
                     if (context.HttpContext.Response.StatusCode == 401)
                     {
-                        using (System.IO.StreamWriter sw = new System.IO.StreamWriter(context.HttpContext.Response.Body))
+                        using (StreamWriter sw = new StreamWriter(context.HttpContext.Response.Body))
                         {
                             sw.Write(Newtonsoft.Json.JsonConvert.SerializeObject(new
                             {
@@ -164,7 +161,7 @@ namespace Eagle.WebApi
                             }));
                         }
                     }
-                    return System.Threading.Tasks.Task.Delay(0);
+                    return Task.Delay(0);
                 }
             });
 

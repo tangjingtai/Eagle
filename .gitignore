@@ -17,3 +17,6 @@
 /Eagle.Infrastructure/Util/bin/Debug
 /Eagle.Infrastructure/Util.EventBus/bin/Debug/netstandard2.0
 /Eagle.Web/Eagle.WebApi/bin/Debug/netcoreapp2.2
+/Eagle.Infrastructure/Util.Datas/bin/Debug/netstandard2.0
+/Eagle.Infrastructure/Util.Logs/bin/Debug/netstandard2.0
+/Eagle.Infrastructure/Util.Security/bin/Debug/netstandard2.0

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AI.Model.Recommend;
 using Eagle.WebApi.Common;
 using Eagle.WebApi.EventHandlers.Events;
 using Eagle.WebApi.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Util.Caches;
 using Util.Events;
-using Util.Events.Handlers;
 using Util.Helpers;
+using Util.Logs;
 
 namespace Eagle.WebApi.Controllers
 {
@@ -32,16 +29,19 @@ namespace Eagle.WebApi.Controllers
 
         // GET api/values
         [HttpGet]
-        [Authorize(Roles = "guest,admin", Policy = "Permission")]
+        //[Authorize(Roles = "guest,admin", Policy = "Permission")]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _logger.LogInformation("values get");
+            _logger.LogInformation("values get log4net");
+            var log = Log.GetLog(this);
+            log.Info("values get nlog");
+            log.Info("values get nlog2");
             return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin", Policy = "Permission")]
+        //[Authorize(Roles = "admin", Policy = "Permission")]
         public async Task<ActionResult<string>> Get(int id)
         {
             if (id == 1)

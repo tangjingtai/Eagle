@@ -4,7 +4,7 @@ namespace Util.Logs.NLog {
     /// <summary>
     /// NLog日志提供程序工厂
     /// </summary>
-    public class LogProviderFactory : ILogProviderFactory {
+    public class NLogProviderFactory : ILogProviderFactory {
         /// <summary>
         /// 创建日志提供程序
         /// </summary>
