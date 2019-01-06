@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DomainObject\Aggregate\**" />
+    <EmbeddedResource Remove="DomainObject\Aggregate\**" />
+    <None Remove="DomainObject\Aggregate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PersistentObject\" />
+    <Folder Include="ValueObject\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Eagle.Infrastructure\Util\Util.csproj" />
+    <ProjectReference Include="..\Eagle.Modules.ICommonModule\Eagle.Modules.ICommonModule.csproj" />
+  </ItemGroup>
+
+</Project>

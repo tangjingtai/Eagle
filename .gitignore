@@ -20,3 +20,11 @@
 /Eagle.Infrastructure/Util.Datas/bin/Debug/netstandard2.0
 /Eagle.Infrastructure/Util.Logs/bin/Debug/netstandard2.0
 /Eagle.Infrastructure/Util.Security/bin/Debug/netstandard2.0
+/Eagle.Domains/Eagle.Modules.CommonDomain/obj
+/Eagle.Modules/Eagle.Modules.CommonModule/bin/Debug/netstandard2.0
+/Eagle.Modules/Eagle.Modules.CommonModule/obj
+/Eagle.Modules/Eagle.Modules.DTO/bin/Debug/netstandard2.0
+/Eagle.Modules/Eagle.Modules.DTO/obj/Debug/netstandard2.0
+/Eagle.Modules/Eagle.Modules.DTO/obj
+/Eagle.Modules/Eagle.Modules.ICommonModule/obj
+/Eagle.Modules/Eagle.Modules.ICommonModule/bin/Debug/netstandard2.0
