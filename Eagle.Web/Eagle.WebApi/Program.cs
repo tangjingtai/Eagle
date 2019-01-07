@@ -7,6 +7,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Util.Events;
+using Util.Helpers;
 
 namespace Eagle.WebApi
 {
@@ -14,11 +16,20 @@ namespace Eagle.WebApi
     {
         public static void Main(string[] args)
         {
+            Console.CancelKeyPress += async (s, e) =>
+            {
+                IEventBus bus;
+                if (Ioc.TryCreate<IEventBus>(out bus))
+                    await bus.StopEventBusAsync();
+            };
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
                 .UseStartup<Startup>();
+        }
     }
 }

@@ -54,18 +54,14 @@ namespace Eagle.WebApi
             // 添加mysql数据库作为数据存储介质
             services.AddMySqlDatabase();
             // 添加couchbase作为缓存组件
-            services.AddCouchbaseCache(config =>
-            {
-                config.Urls = new List<string> { "http://192.168.1.90:8091/pools" };
-                config.BucketAndPassword = new Dictionary<string, string> { { "Test", "123456" } };
-            });
+            services.AddCouchBaseCache();
+            //services.AddCouchBaseCache(config =>
+            //{
+            //    config.Urls = new List<string> { "http://192.168.1.90:8091/pools" };
+            //    config.BucketAndPassword = new Dictionary<string, string> { { "Test", "123456" } };
+            //});
             // 添加RabbitMQ作为事件总线组件
-            services.AddEventBusOfRabbitMQ(config =>
-            {
-                config.Host = "localhost";
-                config.UserName = "guest";
-                config.Password = "guest";
-            });
+            services.AddEventBusOfRabbitMQ();
             // 注册不同的鉴权策略，适用不同的业务场景
             var permissionRequirement = new PermissionRequirement();
             services.AddSingleton<IAuthorizationHandler, PermissionHandler>();

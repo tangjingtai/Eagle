@@ -56,6 +56,18 @@ namespace Util.Dependency {
             return Web.HttpContext?.RequestServices != null ? GetServiceFromHttpContext( type, name ) : GetService( type, name );
         }
 
+
+        /// <summary>
+        /// 创建对象
+        /// </summary>
+        /// <param name="type">对象类型</param>
+        /// <param name="obj">获取的对象</param>
+        /// <param name="name">服务名称</param>
+        public bool TryCreate(Type type, out object obj, string name = null)
+        {
+            return Web.HttpContext?.RequestServices != null ? TryGetServiceFromHttpContext(type, name, out obj) : TryGetService(type, name, out obj);
+        }
+
         /// <summary>
         /// 从HttpContext获取服务
         /// </summary>
@@ -68,12 +80,52 @@ namespace Util.Dependency {
         }
 
         /// <summary>
+        /// Tries the get service from HTTP context.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="obj">The object.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        private bool TryGetServiceFromHttpContext(Type type, string name, out object obj)
+        {
+            var serviceProvider = Web.HttpContext.RequestServices;
+            if (name == null)
+            {
+                try
+                {
+                    obj = serviceProvider.GetService(type);
+                }
+                catch
+                {
+                    obj = null;
+                    return false;
+                }
+            }
+            var context = serviceProvider.GetService<IComponentContext>();
+            return context.TryResolveNamed(name, type, out obj);
+        }
+
+        /// <summary>
         /// 获取服务
         /// </summary>
         private object GetService( Type type, string name ) {
             if( name == null )
                 return _container.Resolve( type );
             return _container.ResolveNamed( name, type ); 
+        }
+
+        /// <summary>
+        /// Tries the get service.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="obj">The object.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        private bool TryGetService(Type type, string name, out object obj)
+        {
+            if (name == null)
+                return _container.TryResolve(type, out obj);
+            return _container.TryResolveNamed(name, type, out obj);
         }
 
         /// <summary>

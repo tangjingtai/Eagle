@@ -10,12 +10,12 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         /// <summary>
         /// 使用couchbase作为缓存
-        /// <para>注意：使用该方法时，还需要在服务注册完成之后，调用<see cref="CouchbaseExtensions.InitCouchbaseCacheClusterClient(IServiceProvider, Action{CouchbaseConfig})"/></para>
+        /// <para>注意：使用该方法时，还需要在服务注册完成之后，调用<see cref="CouchbaseExtensions.InitCouchBaseCacheClusterClient(IServiceProvider, Action{CouchbaseConfig})"/></para>
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configurator">设置couchbase配置信息</param>
         /// <returns></returns>
-        public static IServiceCollection AddCouchbaseCache(this IServiceCollection services)
+        public static IServiceCollection AddCouchBaseCache(this IServiceCollection services)
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services"></param>
         /// <param name="configurator">设置couchbase配置信息</param>
         /// <returns></returns>
-        public static IServiceCollection AddCouchbaseCache(this IServiceCollection services, Action<CouchbaseConfig> configurator)
+        public static IServiceCollection AddCouchBaseCache(this IServiceCollection services, Action<CouchbaseConfig> configurator)
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
@@ -54,7 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="serviceProvide"></param>
         /// <param name="configurator"></param>
-        public static void InitCouchbaseCacheClusterClient(IServiceProvider serviceProvide, Action<CouchbaseConfig> configurator)
+        public static void InitCouchBaseCacheClusterClient(IServiceProvider serviceProvide, Action<CouchbaseConfig> configurator)
         {
             if (serviceProvide == null)
                 throw new ArgumentNullException(nameof(serviceProvide));

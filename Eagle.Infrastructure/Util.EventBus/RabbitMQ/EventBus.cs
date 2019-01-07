@@ -55,5 +55,17 @@ namespace Util.EventBus.RabbitMQ
             await bus.StartAsync();
         }
 
+        /// <summary>
+        /// stop event bus as an asynchronous operation.
+        /// </summary>
+        /// <returns>Task.</returns>
+        public async Task StopEventBusAsync()
+        {
+            if (_busControl == null)
+                await Task.FromResult(0);
+            else
+                await _busControl.StopAsync();
+        }
+
     }
 }

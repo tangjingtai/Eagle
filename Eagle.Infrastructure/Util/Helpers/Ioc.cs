@@ -56,10 +56,37 @@ namespace Util.Helpers {
         /// 创建实例
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="obj">获取的服务对象</param>
+        /// <param name="name">服务名称</param>
+        public static bool TryCreate<T>(out T obj, string name = null) where T : class
+        {
+            return TryCreate(typeof(T), out obj, name);
+        }
+
+        /// <summary>
+        /// 创建实例
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
         /// <param name="type">对象类型</param>
         /// <param name="name">服务名称</param>
         public static T Create<T>( Type type, string name = null ) {
             return (T)DefaultContainer.Create( type, name );
+        }
+
+        /// <summary>
+        /// Tries the create.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type">The type.</param>
+        /// <param name="obj">The object.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>System.Boolean.</returns>
+        public static bool TryCreate<T>(Type type, out T obj, string name = null) where T : class
+        {
+            object service;
+            var flag = DefaultContainer.TryCreate(type, out service, name);
+            obj = flag ? (T)service : default(T);
+            return flag;
         }
 
         /// <summary>

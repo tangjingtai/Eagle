@@ -24,5 +24,11 @@ namespace Util.Events {
         /// <returns></returns>
         Task SubscribeAsync(string host, string userName = "guest", string password = "guest",
             Action<IEventHandlerConfiguration> handlerConfigurator = null);
+
+        /// <summary>
+        /// Stops the event bus.
+        /// </summary>
+        /// <returns>Task.</returns>
+        Task StopEventBusAsync();
     }
 }
