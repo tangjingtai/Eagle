@@ -47,10 +47,11 @@ namespace Eagle.Modules.CommonModule.Repositories
         /// <returns>List&lt;SystemConfigEntity&gt;.</returns>
         public List<SystemConfigEntity> FindAll(Expression<Func<SystemConfigEntity, bool>> predicate = null)
         {
-            return _sqlQuery.Select<SystemConfigEntity>(x => new object[] { x.ConfigName, x.ConfigValue, x.Description })
-                 .From<SystemConfigEntity>()
-                 .Where<SystemConfigEntity>(predicate)
-                 .ToList<SystemConfigEntity>();
+            var query = _sqlQuery.Select<SystemConfigEntity>(x => new object[] { x.ConfigName, x.ConfigValue, x.Description })
+                 .From("SystemConfig");
+            if (predicate != null)
+                query = query.Where<SystemConfigEntity>(predicate);
+            return query.ToList<SystemConfigEntity>();
         }
 
         /// <summary>

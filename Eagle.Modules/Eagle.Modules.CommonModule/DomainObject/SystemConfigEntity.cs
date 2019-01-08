@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Util.Domains;
@@ -8,8 +9,15 @@ namespace Eagle.Modules.CommonModule.DomainObject
     /// <summary>
     /// 初始化SystemConfigEntity
     /// </summary>
-    public class SystemConfigEntity : AggregateRoot<SystemConfigEntity, string>
+    internal class SystemConfigEntity : AggregateRoot<SystemConfigEntity, string>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemConfigEntity"/> class.
+        /// </summary>
+        public SystemConfigEntity():this(Guid.NewGuid().ToString())
+        {
+        }
+
         /// <summary>
         /// 初始化SystemConfigEntity对象
         /// </summary>

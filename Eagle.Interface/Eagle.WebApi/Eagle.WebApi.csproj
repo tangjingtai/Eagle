@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Eagle.Application\Eagle.Application.Service\Eagle.Application.Service.csproj" />
     <ProjectReference Include="..\..\Eagle.Infrastructure\Util.Caches\Util.Caches.csproj" />
     <ProjectReference Include="..\..\Eagle.Infrastructure\Util.Datas\Util.Datas.csproj" />
     <ProjectReference Include="..\..\Eagle.Infrastructure\Util.EventBus\Util.EventBus.csproj" />

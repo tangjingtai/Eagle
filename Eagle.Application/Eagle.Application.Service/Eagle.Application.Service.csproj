@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Eagle.Modules\Eagle.Modules.CommonModule\Eagle.Modules.CommonModule.csproj" />
+    <ProjectReference Include="..\..\Eagle.Modules\Eagle.Modules.DTO\Eagle.Modules.DTO.csproj" />
+    <ProjectReference Include="..\..\Eagle.Modules\Eagle.Modules.ICommonModule\Eagle.Modules.ICommonModule.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -104,6 +104,7 @@ namespace Eagle.WebApi
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Util.xml"));
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Eagle.WebApi.xml"));
             });
+            services.AddModuleService();
 
             //添加Util基础设施服务
             var serviceProvider = services.AddUtil(aopConfig =>
@@ -115,7 +116,6 @@ namespace Eagle.WebApi
                     await content.Invoke(next);
                 });
             });
-
 
             // 注册事件处理器
             serviceProvider.RegisterBusHandlers(new RabbitMQConfig { Host = "localhost", UserName = "guest", Password = "guest" },

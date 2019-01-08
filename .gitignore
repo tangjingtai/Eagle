@@ -28,3 +28,7 @@
 /Eagle.Modules/Eagle.Modules.DTO/obj
 /Eagle.Modules/Eagle.Modules.ICommonModule/obj
 /Eagle.Modules/Eagle.Modules.ICommonModule/bin/Debug/netstandard2.0
+/Eagle.Interface/Eagle.WebApi/obj
+/Eagle.Interface/Eagle.WebApi/bin/Debug/netcoreapp2.2
+/Eagle.Application/Eagle.Application.Service/bin/Debug/netstandard2.0
+/Eagle.Application/Eagle.Application.Service/obj

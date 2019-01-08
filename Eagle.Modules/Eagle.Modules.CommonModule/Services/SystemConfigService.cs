@@ -11,10 +11,12 @@
 // <summary></summary>
 // ***********************************************************************
 
+using Eagle.Modules.CommonModule.DomainObject;
 using Eagle.Modules.CommonModule.Repositories;
 using Eagle.Modules.DTO.CommonModule.Response;
 using Eagle.Modules.ICommonModule.Services;
 using System.Linq;
+using Util;
 
 namespace Eagle.Modules.CommonModule.Services
 {
@@ -22,7 +24,7 @@ namespace Eagle.Modules.CommonModule.Services
     /// Class SystemConfigService.
     /// </summary>
     /// <seealso cref="Eagle.Modules.ICommonModule.Services.ISystemConfigService" />
-    public class SystemConfigService : ISystemConfigService
+    internal class SystemConfigService : ISystemConfigService
     {
         /// <summary>
         /// The system configuration repository
@@ -45,8 +47,7 @@ namespace Eagle.Modules.CommonModule.Services
         public SystemConfig GetSystemConfig()
         {
             var allConfigurations = _systemConfigRepository.FindAll();
-            // TODO: 将行中的ConfigName转换成实体中的对应值
-            return null;
+            return allConfigurations.BuildObjectFromRow<SystemConfig, SystemConfigEntity>("ConfigName", "ConfigValue");
         }
 
         /// <summary>

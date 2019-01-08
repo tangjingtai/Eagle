@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Eagle.Application.Service;
 using Eagle.WebApi.Common;
 using Eagle.WebApi.EventHandlers.Events;
 using Eagle.WebApi.Models;
@@ -17,14 +18,17 @@ namespace Eagle.WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        ISectionCacheService _cacheService;
+        readonly ISectionCacheService _cacheService;
 
-        ILogger<ValuesController> _logger;
+        readonly ILogger<ValuesController> _logger;
 
-        public ValuesController(ISectionCacheService cacheService, ILogger<ValuesController> logger)
+        readonly ICommonModuleService _commonModuleService;
+
+        public ValuesController(ISectionCacheService cacheService, ILogger<ValuesController> logger, ICommonModuleService commonModuleService)
         {
             _cacheService = cacheService;
             _logger = logger;
+            _commonModuleService = commonModuleService;
         }
 
         // GET api/values
@@ -65,6 +69,11 @@ namespace Eagle.WebApi.Controllers
                     await publisher.PublishAsync(new TestEvent { Number = 100, Content = "测试内容" });
                     await publisher.PublishAsync(new TestEvent2 { Number = 100, Content = "测试内容" });
                 }
+            }
+            if(id ==3)
+            {
+                var systemConfig = _commonModuleService.GetSystemConfig();
+                return systemConfig.SystemKey;
             }
             return "value";
         }
