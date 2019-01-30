@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Eagle.Application.Service;
@@ -11,6 +12,7 @@ using Util.Caches;
 using Util.Events;
 using Util.Helpers;
 using Util.Logs;
+using Util.Logs.Extensions;
 
 namespace Eagle.WebApi.Controllers
 {
@@ -40,6 +42,7 @@ namespace Eagle.WebApi.Controllers
             var log = Log.GetLog(this);
             log.Info("values get nlog");
             log.Info("values get nlog2");
+            log.Exception(new Exception("test exception")).Error("测试日志");
             return new string[] { "value1", "value2" };
         }
 
