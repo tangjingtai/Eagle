@@ -112,10 +112,11 @@ namespace Eagle.WebApi
                 // 配置AOP
                 aopConfig.Interceptors.AddDelegate(async (content, next) =>
                 {
-                    Console.WriteLine("delegate interceptor");
+                    //Console.WriteLine("delegate interceptor");
                     await content.Invoke(next);
                 });
             });
+            serviceProvider.AddMSLog();
 
             // 注册事件处理器
             serviceProvider.RegisterBusHandlers(new RabbitMQConfig { Host = "localhost", UserName = "guest", Password = "guest" },

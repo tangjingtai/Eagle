@@ -38,10 +38,10 @@ namespace Eagle.WebApi.Controllers
         //[Authorize(Roles = "guest,admin", Policy = "Permission")]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _logger.LogInformation("values get log4net");
+            _logger.LogInformation("[mslog] values get log");
             var log = Log.GetLog(this);
-            log.Info("values get nlog");
-            log.Info("values get nlog2");
+            log.Info("values get log");
+            log.Info("values get log2");
             log.Exception(new Exception("test exception")).Error("测试日志");
             return new string[] { "value1", "value2" };
         }

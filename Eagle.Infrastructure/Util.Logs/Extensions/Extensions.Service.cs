@@ -10,8 +10,6 @@ using Util.Logs.Abstractions;
 using Util.Logs.Core;
 using Util.Logs.Formats;
 using Util.Logs.Log4net;
-using Logger = Util.Logs.MSLogging.Logger;
-using LoggerFactory = Util.Logs.MSLogging.LoggerFactory;
 
 namespace Util.Logs.Extensions {
     /// <summary>
@@ -28,8 +26,6 @@ namespace Util.Logs.Extensions {
             services.TryAddSingleton<ILogFormat, ContentFormat>();
             services.TryAddScoped<ILogContext, LogContext>();
             services.TryAddScoped<ILog, Log>();
-
-            services.AddMSLog();
         }
 
         /// <summary>
@@ -43,8 +39,6 @@ namespace Util.Logs.Extensions {
             services.TryAddSingleton<ILogFormat, ContentFormat>();
             services.TryAddScoped<ILogContext, LogContext>();
             services.TryAddScoped<ILog, Log>();
-
-            services.AddMSLog();
 
             var fileNamePath = log4NetConfigFile;
             if (!Path.IsPathRooted(fileNamePath))
@@ -63,12 +57,10 @@ namespace Util.Logs.Extensions {
         /// <summary>
         /// Adds the ms log.
         /// </summary>
-        /// <param name="services">The services.</param>
-        private static void AddMSLog(this IServiceCollection services)
+        /// <param name="serviceProvider">The service provider.</param>
+        public static void AddMSLog(this IServiceProvider serviceProvider)
         {
-            // ms logging
-            services.TryAddSingleton<ILoggerFactory, LoggerFactory>();
-            services.TryAddSingleton<ILogger, Logger>();
+            serviceProvider.GetService<ILoggerFactory>().AddProvider(new Util.Logs.MSLogging.LoggerProvider());
         }
 
         /// <summary>
