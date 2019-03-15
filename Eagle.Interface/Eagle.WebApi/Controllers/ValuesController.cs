@@ -66,11 +66,11 @@ namespace Eagle.WebApi.Controllers
             }
             if (id == 2)
             {
-                for (var i = 0; i < 1; i++)
+                for (var i = 0; i < 30; i++)
                 {
                     var publisher = Ioc.Create<IEventBus>();
                     await publisher.PublishAsync(new TestEvent { Number = 100, Content = "测试内容" });
-                    await publisher.PublishAsync(new TestEvent2 { Number = 100, Content = "测试内容" });
+                    await publisher.PublishAsync(new TestEvent2 { Number = 100, Content = "测试内容2" });
                 }
             }
             if(id ==3)

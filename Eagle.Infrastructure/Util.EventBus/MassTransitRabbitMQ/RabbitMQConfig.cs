@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Util.EventBus.RabbitMQ
+namespace Util.EventBus.MassTransitRabbitMQ
 {
     public class RabbitMQConfig
     {
@@ -11,14 +11,5 @@ namespace Util.EventBus.RabbitMQ
         public string UserName { get; set;}
 
         public string Password { get; set; }
-    }
-
-    public class QueueConfig
-    {
-        public string Host { get; set; }
-
-        public string Queue { get; set; }
-
-        public Type EventType { get; set; }
     }
 }

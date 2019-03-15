@@ -15,7 +15,7 @@ using Util.Datas.Dapper;
 using Eagle.WebApi.EventHandlers.Events;
 using AspectCore.Configuration;
 using Eagle.WebApi.EventHandlers;
-using Util.EventBus.RabbitMQ;
+using Util.EventBus.MassTransitRabbitMQ;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Eagle.WebApi.Common;
@@ -65,7 +65,6 @@ namespace Eagle.WebApi
             // 注册不同的鉴权策略，适用不同的业务场景
             var permissionRequirement = new PermissionRequirement();
             services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
-
             services.AddAuthentication(authenOptions =>
             {
                 authenOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -123,8 +122,8 @@ namespace Eagle.WebApi
                 configuration =>
                 {
                     // TODO: 外置到其他地方进行注册
-                    configuration.ConfigureHandler<TestEvent, TestEventHandler>("Test1");
-                    configuration.ConfigureHandler<TestEvent2, TestEventHandler2>("Test2");
+                    configuration.ConfigureHandler<TestEvent, TestEventHandler>("Test1", 3);
+                    configuration.ConfigureHandler<TestEvent2, TestEventHandler2>("Test2", 5);
                 });
             return serviceProvider;
         }
@@ -140,7 +139,8 @@ namespace Eagle.WebApi
             {
                 app.UseHsts();
             }
-
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseAuthentication();//配置授权
             //处理异常
             app.UseStatusCodePages(new StatusCodePagesOptions()
@@ -162,7 +162,6 @@ namespace Eagle.WebApi
                 }
             });
 
-            app.UseHttpsRedirection();
             app.UseMvc(routes => {
                 routes.MapRoute(
                    name: "Default",
