@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.UserService", "Eagle.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.GRPCClient", "Eagle.Interface\Eagle.GRPCClient\Eagle.GRPCClient.csproj", "{7860F078-30E7-4D4E-9249-5567EC6D7B09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Gateway", "Eagle.Interface\Eagle.Gateway\Eagle.Gateway.csproj", "{D64C6E77-06A5-4996-BD5C-11E92955CCC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Gateway", "Eagle.Interface\Eagle.Gateway\Eagle.Gateway.csproj", "{D64C6E77-06A5-4996-BD5C-11E92955CCC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util.FeignNet", "Eagle.Infrastructure\Util.FeignNet\Util.FeignNet.csproj", "{21D64FA3-E6DD-4E7F-B9B1-624E0C6FD388}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{D64C6E77-06A5-4996-BD5C-11E92955CCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D64C6E77-06A5-4996-BD5C-11E92955CCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D64C6E77-06A5-4996-BD5C-11E92955CCC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D64FA3-E6DD-4E7F-B9B1-624E0C6FD388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D64FA3-E6DD-4E7F-B9B1-624E0C6FD388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D64FA3-E6DD-4E7F-B9B1-624E0C6FD388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D64FA3-E6DD-4E7F-B9B1-624E0C6FD388}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +133,7 @@ Global
 		{74A7868B-DC66-4F02-86E6-E98614156DBE} = {2464EC77-A795-403E-B097-9DAC3503D869}
 		{7860F078-30E7-4D4E-9249-5567EC6D7B09} = {8307C751-BC6E-4F98-AFA3-CED44D77156B}
 		{D64C6E77-06A5-4996-BD5C-11E92955CCC7} = {8307C751-BC6E-4F98-AFA3-CED44D77156B}
+		{21D64FA3-E6DD-4E7F-B9B1-624E0C6FD388} = {0AEC40BF-FD32-4256-8A28-03BC5890FC8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD161489-D968-4424-954D-0A0EC806BED1}
