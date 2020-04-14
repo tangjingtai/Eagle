@@ -145,6 +145,10 @@ namespace Eagle.WebApi.Common
         /// </summary>
         public string Issuer { get; set; } = ISSUER;
 
+        /// <summary>
+        /// 验证对象
+        /// </summary>
+        /// <returns></returns>
         public ValidationResultCollection Validate()
         {
             if (string.IsNullOrEmpty(Subject))

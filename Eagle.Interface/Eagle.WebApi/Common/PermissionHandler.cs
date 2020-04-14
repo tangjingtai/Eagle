@@ -25,10 +25,20 @@ namespace Eagle.WebApi.Common
         {
             Schemes = schemes;
         }
+
+        /// <summary>
+        /// handle requirement as an asynchronous operation.
+        /// <para>
+        /// 验证是否拥有requirement中所指定的授权
+        /// </para>
+        /// </summary>
+        /// <param name="context">The authorization context.</param>
+        /// <param name="requirement">The requirement to evaluate.</param>
+        /// <returns>Task.</returns>
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
         {
             //从AuthorizationHandlerContext转成HttpContext，以便取出表求信息
-            var httpContext = (context.Resource as Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext).HttpContext;;
+            var httpContext = (context.Resource as Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext).HttpContext;
             //判断请求是否停止
             var handlers = httpContext.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>();
             foreach (var scheme in await Schemes.GetRequestHandlerSchemesAsync())
@@ -40,12 +50,13 @@ namespace Eagle.WebApi.Common
                     return;
                 }
             }
-            //判断请求是否拥有凭据，即有没有登录
-            var defaultAuthenticate = await Schemes.GetDefaultAuthenticateSchemeAsync();
+            
+           //判断请求是否拥有凭据，即有没有登录
+           var defaultAuthenticate = await Schemes.GetDefaultAuthenticateSchemeAsync();
             if (defaultAuthenticate != null)
             {
                 var result = await httpContext.AuthenticateAsync(defaultAuthenticate.Name);
-                //result?.Principal不为空即登录成功
+                //result?.Principal不为空即表示已登录
                 if (result?.Principal != null && result.Principal.Claims != null && result.Principal.Claims.Count() >0)
                 {
                     var subjectClaim = result.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
@@ -67,6 +78,9 @@ namespace Eagle.WebApi.Common
         }
     }
 
+    /// <summary>
+    /// PermissionRequirement
+    /// </summary>
     public class PermissionRequirement : IAuthorizationRequirement
     {
         /// <summary>
