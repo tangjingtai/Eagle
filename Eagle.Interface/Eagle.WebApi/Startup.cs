@@ -15,7 +15,6 @@ using Util.Datas.Dapper;
 using Eagle.WebApi.EventHandlers.Events;
 using AspectCore.Configuration;
 using Eagle.WebApi.EventHandlers;
-using Util.EventBus.RabbitMQ;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Eagle.WebApi.Common;

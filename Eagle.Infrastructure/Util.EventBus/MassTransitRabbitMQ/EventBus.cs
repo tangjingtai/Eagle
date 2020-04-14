@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Util.Events;
 using Util.Events.Handlers;
 
-namespace Util.EventBus.RabbitMQ
+namespace Util.EventBus.MassTransitRabbitMQ
 {
     /// <summary>
     /// 事件总线

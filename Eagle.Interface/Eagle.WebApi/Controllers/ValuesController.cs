@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Eagle.Application.Service;
@@ -12,6 +13,7 @@ using Util.Caches;
 using Util.Events;
 using Util.Helpers;
 using Util.Logs;
+using Util.Logs.Extensions;
 
 namespace Eagle.WebApi.Controllers
 {
@@ -37,10 +39,11 @@ namespace Eagle.WebApi.Controllers
         //[Authorize(Roles = "guest,admin", Policy = "Permission")]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _logger.LogInformation("values get log4net");
+            _logger.LogInformation("[mslog] values get log");
             var log = Log.GetLog(this);
-            log.Info("values get nlog");
-            log.Info("values get nlog2");
+            log.Info("values get log");
+            log.Info("values get log2");
+            log.Exception(new Exception("test exception")).Error("测试日志");
             return new string[] { "value1", "value2", "value3" };
         }
 
@@ -64,11 +67,11 @@ namespace Eagle.WebApi.Controllers
             }
             if (id == 2)
             {
-                for (var i = 0; i < 1; i++)
+                for (var i = 0; i < 30; i++)
                 {
                     var publisher = Ioc.Create<IEventBus>();
                     await publisher.PublishAsync(new TestEvent { Number = 100, Content = "测试内容" });
-                    await publisher.PublishAsync(new TestEvent2 { Number = 100, Content = "测试内容" });
+                    await publisher.PublishAsync(new TestEvent2 { Number = 100, Content = "测试内容2" });
                 }
             }
             if(id ==3)

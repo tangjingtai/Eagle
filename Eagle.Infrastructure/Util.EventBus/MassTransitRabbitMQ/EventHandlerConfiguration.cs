@@ -6,7 +6,7 @@ using GreenPipes;
 using MassTransit;
 using Util.Helpers;
 
-namespace Util.EventBus.RabbitMQ
+namespace Util.EventBus.MassTransitRabbitMQ
 {
     /// <summary>
     /// 使用RabbitMQ作为事件总线，事件处理器配置

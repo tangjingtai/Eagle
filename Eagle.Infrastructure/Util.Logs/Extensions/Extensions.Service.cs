@@ -5,6 +5,7 @@ using Exceptionless;
 using log4net;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using Util.Logs.Abstractions;
 using Util.Logs.Core;
 using Util.Logs.Formats;
@@ -51,6 +52,15 @@ namespace Util.Logs.Extensions {
 
             var repository = LogManager.CreateRepository(Log4Provider.LOG_REPOSITORY_NAME);
             log4net.Config.XmlConfigurator.ConfigureAndWatch(repository, new FileInfo(fileNamePath));
+        }
+
+        /// <summary>
+        /// Adds the ms log.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public static void AddMSLog(this IServiceProvider serviceProvider)
+        {
+            serviceProvider.GetService<ILoggerFactory>().AddProvider(new Util.Logs.MSLogging.LoggerProvider());
         }
 
         /// <summary>

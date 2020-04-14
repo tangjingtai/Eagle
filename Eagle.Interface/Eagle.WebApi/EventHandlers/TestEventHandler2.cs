@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Util.Events.Handlers;
 
@@ -11,7 +12,8 @@ namespace Eagle.WebApi.EventHandlers
     {
         public Task HandleAsync(TestEvent2 @event)
         {
-            Console.WriteLine($"TestEventHandler2 --  Number:{@event.Number}, Content:{@event.Content}");
+            Console.WriteLine($"{DateTime.Now.ToLongTimeString()} [{Thread.CurrentThread.ManagedThreadId}]TestEventHandler2 -- Number:{@event.Number}, Content:{@event.Content}");
+            Thread.Sleep(1000);
             return Task.FromResult(0);
         }
     }
