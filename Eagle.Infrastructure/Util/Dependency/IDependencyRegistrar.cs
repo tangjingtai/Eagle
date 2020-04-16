@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Autofac;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Util.Dependency {
     /// <summary>
@@ -10,5 +11,6 @@ namespace Util.Dependency {
         /// </summary>
         /// <param name="services">服务集合</param>
         void Register( IServiceCollection services );
+
     }
 }

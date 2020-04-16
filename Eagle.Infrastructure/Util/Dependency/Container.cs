@@ -17,6 +17,18 @@ namespace Util.Dependency {
         private Autofac.IContainer _container;
 
         /// <summary>
+        /// 设置被代理的容器
+        /// </summary>
+        /// <param name="container"></param>
+        public void SetProxy(Autofac.IContainer container)
+        {
+            if (container == null)
+                throw new ArgumentNullException(nameof(container));
+
+            _container = container as Autofac.IContainer;
+        }
+
+        /// <summary>
         /// 创建集合
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>

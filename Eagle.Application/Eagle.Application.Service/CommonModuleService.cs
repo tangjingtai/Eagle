@@ -30,9 +30,6 @@ namespace Eagle.Application.Service
 
     internal class CommonModuleService : ICommonModuleService
     {
-        /// <summary>
-        /// The system configuration service
-        /// </summary>
         readonly ISystemConfigService _systemConfigService;
 
         /// <summary>

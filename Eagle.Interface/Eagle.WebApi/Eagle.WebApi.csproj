@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="2.2.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
@@ -30,6 +29,7 @@
     <ProjectReference Include="..\..\Eagle.Infrastructure\Util.Caches\Util.Caches.csproj" />
     <ProjectReference Include="..\..\Eagle.Infrastructure\Util.Datas\Util.Datas.csproj" />
     <ProjectReference Include="..\..\Eagle.Infrastructure\Util.EventBus\Util.EventBus.csproj" />
+    <ProjectReference Include="..\..\Eagle.Infrastructure\Util.ServiceDiscovery\Util.ServiceDiscovery.csproj" />
     <ProjectReference Include="..\..\Eagle.Infrastructure\Util\Util.csproj" />
   </ItemGroup>
 

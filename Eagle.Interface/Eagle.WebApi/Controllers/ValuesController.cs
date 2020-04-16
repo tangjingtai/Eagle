@@ -6,6 +6,7 @@ using Eagle.Application.Service;
 using Eagle.WebApi.Common;
 using Eagle.WebApi.EventHandlers.Events;
 using Eagle.WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Util.Caches;
@@ -43,12 +44,12 @@ namespace Eagle.WebApi.Controllers
             log.Info("values get log");
             log.Info("values get log2");
             log.Exception(new Exception("test exception")).Error("测试日志");
-            return new string[] { "value1", "value2" };
+            return new string[] { "value1", "value2", "value3" };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        //[Authorize(Roles = "admin", Policy = "Permission")]
+        [Authorize(Roles = "admin", Policy = "Permission")]
         public async Task<ActionResult<string>> Get(int id)
         {
             if (id == 1)
@@ -77,6 +78,12 @@ namespace Eagle.WebApi.Controllers
             {
                 var systemConfig = _commonModuleService.GetSystemConfig();
                 return systemConfig.SystemKey;
+            }
+            if(id ==4)
+            {
+                await Task.Delay(30 * 1000);
+                //System.Threading.Thread.Sleep(30 * 1000);
+                return "delay value";
             }
             return "value";
         }

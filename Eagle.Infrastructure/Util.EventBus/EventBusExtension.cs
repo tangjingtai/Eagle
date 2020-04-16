@@ -31,9 +31,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="serviceProvider">The service provider.</param>
         /// <param name="config">The configuration.</param>
         /// <param name="handlerConfigurator">The handler configurator.</param>
-        public static void RegisterBusHandlers(this IServiceProvider serviceProvider, RabbitMQConfig config, Action<IEventHandlerConfiguration> handlerConfigurator)
+        public static void UseEventBusOfRabbitMQ(this IApplicationBuilder app, RabbitMQConfig config, Action<IEventHandlerConfiguration> handlerConfigurator)
         {
-            var bus = serviceProvider.GetService<IEventBus>();
+            var bus = app.ApplicationServices.GetService<IEventBus>();
             bus.SubscribeAsync(config.Host, config.UserName, config.Password, handlerConfigurator);
         }
     }

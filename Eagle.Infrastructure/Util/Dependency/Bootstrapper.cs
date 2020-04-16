@@ -81,7 +81,7 @@ namespace Util.Dependency {
             _assemblies = _finder.GetAssemblies();
             return Ioc.DefaultContainer.Register( _services, RegisterServices, _configs );
         }
-
+        
         /// <summary>
         /// 注册服务集合
         /// </summary>
