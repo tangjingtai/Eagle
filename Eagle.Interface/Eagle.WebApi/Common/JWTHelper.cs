@@ -23,6 +23,8 @@ namespace Eagle.WebApi.Common
         /// </summary>
         public static readonly SymmetricSecurityKey SYMMTRIC_KEY = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("eagle flying in the sky."));
 
+        public static readonly AsymmetricSecurityKey ASYMMTRIC_KEY = new RsaSecurityKey(new System.Security.Cryptography.RSAParameters {  })
+
         /// <summary>
         /// Audience: api
         /// </summary>

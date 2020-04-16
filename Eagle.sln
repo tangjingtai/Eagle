@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eagle.Infrastructure", "Eagle.Infrastructure", "{0AEC40BF-FD32-4256-8A28-03BC5890FC8C}"
 EndProject
@@ -31,7 +31,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eagle.Application", "Eagle.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.WebApi", "Eagle.Interface\Eagle.WebApi\Eagle.WebApi.csproj", "{A0DBC2D9-E7BB-4905-81D7-A6F377CAD1AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Application.Service", "Eagle.Application\Eagle.Application.Service\Eagle.Application.Service.csproj", "{718100D2-E9D3-47AA-9ADD-23D4D258AD6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Application.Service", "Eagle.Application\Eagle.Application.Service\Eagle.Application.Service.csproj", "{718100D2-E9D3-47AA-9ADD-23D4D258AD6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C4366B04-D6C0-440E-9278-79BB01E88A2C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "Tests\XUnitTestProject1\XUnitTestProject1.csproj", "{D313E8EF-CE1A-4419-AA6F-BE11757D00B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.FeignNet", "Eagle.Infrastructure\Util.FeignNet\Util.FeignNet.csproj", "{99ECC83D-75E3-4E13-ACC7-57D1289F34F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +89,14 @@ Global
 		{718100D2-E9D3-47AA-9ADD-23D4D258AD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{718100D2-E9D3-47AA-9ADD-23D4D258AD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{718100D2-E9D3-47AA-9ADD-23D4D258AD6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D313E8EF-CE1A-4419-AA6F-BE11757D00B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D313E8EF-CE1A-4419-AA6F-BE11757D00B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D313E8EF-CE1A-4419-AA6F-BE11757D00B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D313E8EF-CE1A-4419-AA6F-BE11757D00B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99ECC83D-75E3-4E13-ACC7-57D1289F34F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99ECC83D-75E3-4E13-ACC7-57D1289F34F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99ECC83D-75E3-4E13-ACC7-57D1289F34F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99ECC83D-75E3-4E13-ACC7-57D1289F34F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +113,8 @@ Global
 		{17016BD9-D6AA-4986-B4B3-F750E8CA5485} = {2464EC77-A795-403E-B097-9DAC3503D869}
 		{A0DBC2D9-E7BB-4905-81D7-A6F377CAD1AD} = {8307C751-BC6E-4F98-AFA3-CED44D77156B}
 		{718100D2-E9D3-47AA-9ADD-23D4D258AD6E} = {95D765B8-E87B-49C0-A1F2-785904D618C0}
+		{D313E8EF-CE1A-4419-AA6F-BE11757D00B9} = {C4366B04-D6C0-440E-9278-79BB01E88A2C}
+		{99ECC83D-75E3-4E13-ACC7-57D1289F34F3} = {0AEC40BF-FD32-4256-8A28-03BC5890FC8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD161489-D968-4424-954D-0A0EC806BED1}
