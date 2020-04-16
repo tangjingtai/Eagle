@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Util.Helpers {
     /// <summary>
@@ -16,6 +17,19 @@ namespace Util.Helpers {
         }
 
         /// <summary>
+        /// 将Json字符串转换为对象
+        /// </summary>
+        /// <param name="json">Json字符串</param>
+        /// <param name="type">转换后的对象类型</param>
+        /// <returns></returns>
+        public static object ToObject(string json, Type type)
+        {
+            if (string.IsNullOrWhiteSpace(json))
+                return type.IsValueType ? Activator.CreateInstance(type) : null;
+            return JsonConvert.DeserializeObject(json, type);
+        }
+
+        /// <summary>
         /// 将对象转换为Json字符串
         /// </summary>
         /// <param name="target">目标对象</param>
@@ -26,7 +40,7 @@ namespace Util.Helpers {
             var result = JsonConvert.SerializeObject( target );
             if ( isConvertToSingleQuotes )
                 result = result.Replace( "\"", "'" );
-            return result;
+            return result; 
         }
     }
 }
